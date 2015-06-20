@@ -7,6 +7,7 @@ class Api::TodoItemsController < ApplicationController
         if item.save
             render status: 200, json: {
                 message: "Successfully created To-do Item",
+                todo_list: @list,
                 todo_item: item
             }.to_json
         else
