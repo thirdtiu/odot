@@ -18,6 +18,22 @@ class Api::TodoItemsController < ApplicationController
         end
     end
 
+    def update
+        item = @list.todo_items.find(params[:id])
+        
+        if item.update(item_params)
+            render status: 200, json: {
+                message: "Successfully updated",
+                todo_list: @list,
+                todo_item: item
+            }.to_json
+        else
+            render status: 422, json: {
+                errors: item.errors
+            }.to_json
+        end
+    end
+
     private
 
     def item_params
